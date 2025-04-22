@@ -1,0 +1,483 @@
+import React from 'react';
+import { Box, Typography, Paper, Breadcrumbs, Link, Container, Grid, Card, CardContent, CardActions, Button } from '@mui/material';
+import { Routes, Route, Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import InfoIcon from '@mui/icons-material/Info';
+import DescriptionIcon from '@mui/icons-material/Description';
+import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
+// Hauptmenü-Struktur für Jahresstatistik
+const subMenuItems = [
+  {
+    title: 'Info',
+    description: 'Informationen zur Jahresstatistik',
+    icon: <InfoIcon fontSize="large" sx={{ color: 'primary.main' }} />,
+    path: '/jahresstatistik/info',
+    hasSubItems: false,
+    borderStyle: { 
+      borderLeft: '4px solid',
+      borderColor: 'primary.main'
+    }
+  },
+  {
+    title: 'Deckblatt',
+    description: 'Deckblatt der Jahresstatistik',
+    icon: <DescriptionIcon fontSize="large" sx={{ color: 'primary.main' }} />,
+    path: '/jahresstatistik/deckblatt',
+    hasSubItems: false,
+    borderStyle: { 
+      borderLeft: '4px solid',
+      borderColor: 'primary.main'
+    }
+  },
+  {
+    title: 'Erfassung',
+    description: 'Erfassung von statistischen Daten',
+    icon: <EditIcon fontSize="large" sx={{ color: 'primary.main' }} />,
+    path: '/jahresstatistik/erfassung',
+    hasSubItems: false,
+    borderStyle: { 
+      borderLeft: '4px solid',
+      borderColor: 'primary.main'
+    }
+  },
+  {
+    title: 'Anzeigen',
+    description: 'Anzeigen der statistischen Auswertungen',
+    icon: <VisibilityIcon fontSize="large" sx={{ color: 'primary.main' }} />,
+    path: '/jahresstatistik/anzeigen',
+    hasSubItems: false,
+    borderStyle: { 
+      borderLeft: '4px solid',
+      borderColor: 'primary.main'
+    }
+  }
+];
+
+// Subpages für die Untermenüs
+const StatistikInfo = () => (
+  <Paper sx={{ p: 3 }}>
+    <Typography variant="h5" gutterBottom>Jahresstatistik - Info</Typography>
+    <Typography variant="body1">
+      Die Jahresstatistik bietet eine Übersicht aller relevanten statistischen Daten des vergangenen Jahres. 
+      Hier finden Sie Informationen zur Datenerhebung, Auswertungsmethoden und rechtliche Grundlagen.
+    </Typography>
+  </Paper>
+);
+
+const StatistikDeckblatt = () => (
+  <Paper sx={{ p: 3 }}>
+    <Typography variant="h5" gutterBottom>Jahresstatistik - Deckblatt</Typography>
+    <Typography variant="body1">
+      Auf dem Deckblatt können Sie allgemeine Informationen und Zusammenfassungen der Jahresstatistik einsehen.
+      Hier werden Kennzahlen, Trends und wichtige Entwicklungen des vergangenen Jahres dargestellt.
+    </Typography>
+  </Paper>
+);
+
+const StatistikErfassung = () => (
+  <Paper sx={{ p: 3 }}>
+    <Typography variant="h5" gutterBottom>Jahresstatistik - Erfassung</Typography>
+    <Typography variant="body1">
+      Im Bereich Erfassung können Sie neue statistische Daten eingeben, vorhandene Daten bearbeiten 
+      und die Datenbasis für die Jahresstatistik pflegen. Achten Sie auf Vollständigkeit und Korrektheit der Eingaben.
+    </Typography>
+  </Paper>
+);
+
+const StatistikAnzeigen = () => (
+  <Paper sx={{ p: 3 }}>
+    <Typography variant="h5" gutterBottom>Jahresstatistik - Anzeigen</Typography>
+    <Typography variant="body1">
+      Hier können Sie verschiedene Auswertungen und Visualisierungen der Jahresstatistik einsehen.
+      Die Daten werden in Form von Tabellen, Diagrammen und Grafiken dargestellt.
+    </Typography>
+  </Paper>
+);
+
+// Info Hauptkomponente
+const Info = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <Box>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>Jahresstatistik - Info</Typography>
+      <Typography variant="body1" paragraph>
+        Die Jahresstatistik bietet eine Übersicht aller relevanten statistischen Daten des vergangenen Jahres. 
+        Hier finden Sie Informationen zur Datenerhebung, Auswertungsmethoden und rechtliche Grundlagen.
+      </Typography>
+      
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom>Zweck der Jahresstatistik</Typography>
+        <Typography variant="body1" paragraph>
+          Die Jahresstatistik dient der systematischen Erfassung, Auswertung und Darstellung aller relevanten Daten und Kennzahlen des vergangenen Kalenderjahres.
+          Sie bildet eine wichtige Grundlage für die Planung zukünftiger Maßnahmen und die Optimierung von Prozessen.
+        </Typography>
+        
+        <Typography variant="h6" gutterBottom>Rechtliche Grundlagen</Typography>
+        <Typography variant="body1" paragraph>
+          Die Erhebung und Verarbeitung der Daten erfolgt auf Grundlage gesetzlicher Vorgaben und internen Richtlinien.
+          Alle Daten werden unter Beachtung der geltenden Datenschutzbestimmungen verarbeitet.
+        </Typography>
+        
+        <Typography variant="h6" gutterBottom>Verantwortlichkeiten</Typography>
+        <Typography variant="body1">
+          Für die Erstellung und Pflege der Jahresstatistik ist die Abteilung Statistik verantwortlich.
+          Bei Fragen oder Anmerkungen wenden Sie sich bitte an statistik@beispiel.de.
+        </Typography>
+      </Paper>
+      
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => navigate('/jahresstatistik')}
+        sx={{ mt: 2 }}
+      >
+        Zurück zur Übersicht
+      </Button>
+    </Box>
+  );
+};
+
+// Deckblatt Hauptkomponente
+const Deckblatt = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <Box>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>Jahresstatistik - Deckblatt</Typography>
+      <Typography variant="body1" paragraph>
+        Das Deckblatt der Jahresstatistik bietet einen Überblick über die wichtigsten Kennzahlen und Ergebnisse des vergangenen Jahres.
+      </Typography>
+      
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom>Zusammenfassung des Jahres 2024</Typography>
+        
+        <Grid container spacing={3} sx={{ mb: 3 }}>
+          <Grid item xs={12} md={6}>
+            <Card sx={{ height: '100%', bgcolor: 'background.default' }}>
+              <CardContent>
+                <Typography variant="subtitle1" gutterBottom>Gesamtzahl der Einsätze</Typography>
+                <Typography variant="h4" color="primary" sx={{ mb: 2 }}>1.247</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Im Vergleich zum Vorjahr: +8,3%
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6}>
+            <Card sx={{ height: '100%', bgcolor: 'background.default' }}>
+              <CardContent>
+                <Typography variant="subtitle1" gutterBottom>Durchschnittliche Einsatzdauer</Typography>
+                <Typography variant="h4" color="primary" sx={{ mb: 2 }}>37,5 min</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Im Vergleich zum Vorjahr: -2,1%
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+        
+        <Typography variant="h6" gutterBottom>Wichtige Meilensteine</Typography>
+        <Typography variant="body1" paragraph>
+          • Erfolgreiche Einführung des neuen Einsatzleitsystems<br />
+          • Verbesserung der durchschnittlichen Reaktionszeit um 12%<br />
+          • Abschluss von 24 Großprojekten mit einem Gesamtvolumen von 2,3 Mio. Euro
+        </Typography>
+      </Paper>
+      
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => navigate('/jahresstatistik')}
+        sx={{ mt: 2 }}
+      >
+        Zurück zur Übersicht
+      </Button>
+    </Box>
+  );
+};
+
+// Erfassung Hauptkomponente
+const Erfassung = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <Box>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>Jahresstatistik - Erfassung</Typography>
+      <Typography variant="body1" paragraph>
+        In diesem Bereich können Sie statistische Daten für die Jahresauswertung erfassen und bearbeiten.
+      </Typography>
+      
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom>Datenerfassung</Typography>
+        <Typography variant="body1" paragraph>
+          Bitte beachten Sie bei der Erfassung der Daten folgende Punkte:
+        </Typography>
+        
+        <Typography variant="body1" component="ul" sx={{ mb: 3 }}>
+          <li>Vollständigkeit der Daten sicherstellen</li>
+          <li>Plausibilitätsprüfung durchführen</li>
+          <li>Bei Unklarheiten Rücksprache mit der Fachabteilung halten</li>
+          <li>Änderungen dokumentieren</li>
+        </Typography>
+        
+        <Typography variant="body1" paragraph>
+          Die Datenerfassung für die Jahresstatistik 2024 ist bis zum 15.01.2025 abzuschließen.
+        </Typography>
+        
+        <Grid container spacing={2} sx={{ mt: 2 }}>
+          <Grid item>
+            <Button variant="contained" color="primary">
+              Neue Erfassung starten
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" color="primary">
+              Bestehende Erfassung bearbeiten
+            </Button>
+          </Grid>
+        </Grid>
+      </Paper>
+      
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => navigate('/jahresstatistik')}
+        sx={{ mt: 2 }}
+      >
+        Zurück zur Übersicht
+      </Button>
+    </Box>
+  );
+};
+
+// Anzeigen Hauptkomponente
+const Anzeigen = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <Box>
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>Jahresstatistik - Anzeigen</Typography>
+      <Typography variant="body1" paragraph>
+        Hier können Sie verschiedene Auswertungen und Visualisierungen der Jahresstatistik einsehen.
+      </Typography>
+      
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom>Verfügbare Auswertungen</Typography>
+        
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card 
+              sx={{ 
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 4,
+                },
+                cursor: 'pointer',
+                borderLeft: '4px solid',
+                borderColor: 'primary.main'
+              }}
+            >
+              <CardContent sx={{ padding: 3, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+                  <BarChartIcon fontSize="large" sx={{ color: 'primary.main' }} />
+                </Box>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  Einsatzstatistik
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Auswertung der Einsatzdaten nach Kategorien, Regionen und Zeiträumen
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+                <Button size="small" color="primary">
+                  Öffnen
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} sm={6} md={4}>
+            <Card 
+              sx={{ 
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 4,
+                },
+                cursor: 'pointer',
+                borderLeft: '4px solid',
+                borderColor: 'primary.main'
+              }}
+            >
+              <CardContent sx={{ padding: 3, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+                  <AssessmentIcon fontSize="large" sx={{ color: 'primary.main' }} />
+                </Box>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  Ressourcenauswertung
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Analyse des Ressourceneinsatzes und der Effizienz
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+                <Button size="small" color="primary">
+                  Öffnen
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} sm={6} md={4}>
+            <Card 
+              sx={{ 
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 4,
+                },
+                cursor: 'pointer',
+                borderLeft: '4px solid',
+                borderColor: 'primary.main'
+              }}
+            >
+              <CardContent sx={{ padding: 3, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+                  <DescriptionIcon fontSize="large" sx={{ color: 'primary.main' }} />
+                </Box>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  Berichtsgenerator
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Erstellen individueller Berichte und Auswertungen
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+                <Button size="small" color="primary">
+                  Öffnen
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+      </Paper>
+      
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => navigate('/jahresstatistik')}
+        sx={{ mt: 2 }}
+      >
+        Zurück zur Übersicht
+      </Button>
+    </Box>
+  );
+};
+
+function Jahresstatistik() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+
+  return (
+    <Container maxWidth="lg">
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" gutterBottom>Jahresstatistik</Typography>
+        <Breadcrumbs 
+          separator={<NavigateNextIcon fontSize="small" />} 
+          aria-label="breadcrumb"
+          sx={{ mb: 3 }}
+        >
+          <Link component={RouterLink} to="/" underline="hover" color="inherit">
+            Home
+          </Link>
+          <Link component={RouterLink} to="/jahresstatistik" underline="hover" color="inherit">
+            Jahresstatistik
+          </Link>
+          {pathSegments.length > 1 && (
+            <Typography color="text.primary">
+              {pathSegments[1].charAt(0).toUpperCase() + pathSegments[1].slice(1)}
+            </Typography>
+          )}
+        </Breadcrumbs>
+      </Box>
+
+      <Box sx={{ mb: 3 }}>
+        <Routes>
+          <Route index element={
+            <Box>
+              <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>Jahresstatistik-Bereich</Typography>
+              <Typography variant="body1" paragraph>
+                In diesem Bereich können Sie die Jahresstatistik einsehen, erfassen und auswerten. 
+                Wählen Sie eine der folgenden Optionen, um fortzufahren.
+              </Typography>
+              
+              <Grid container spacing={3}>
+                {subMenuItems.map((item) => (
+                  <Grid item xs={12} sm={6} md={3} key={item.title}>
+                    <Card 
+                      sx={{ 
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        transition: 'transform 0.2s, box-shadow 0.2s',
+                        '&:hover': {
+                          transform: 'translateY(-5px)',
+                          boxShadow: 4,
+                        },
+                        cursor: 'pointer',
+                        ...item.borderStyle
+                      }}
+                      onClick={() => navigate(item.path)}
+                    >
+                      <CardContent sx={{ padding: 3, flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                        <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+                          {item.icon}
+                        </Box>
+                        <Typography variant="h6" component="h2" gutterBottom>
+                          {item.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {item.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+                        <Button size="small" color="primary" onClick={() => navigate(item.path)}>
+                          Öffnen
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          } />
+          
+          {/* Untermenüs */}
+          <Route path="info" element={<Info />} />
+          <Route path="deckblatt" element={<Deckblatt />} />
+          <Route path="erfassung" element={<Erfassung />} />
+          <Route path="anzeigen" element={<Anzeigen />} />
+        </Routes>
+      </Box>
+    </Container>
+  );
+}
+
+export default Jahresstatistik;
