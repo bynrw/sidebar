@@ -248,7 +248,8 @@ const MediRIG = () => {
                 },
                 borderLeft: '4px solid',
                 borderColor: 'medical.main',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                position: 'relative' // Changed from paddingTop: 80
               }}
               onClick={() => navigate(item.path)}
             >
@@ -264,7 +265,10 @@ const MediRIG = () => {
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
-                <Button size="small" color="medical" onClick={() => navigate(item.path)}>
+                <Button size="small" color="medical" onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(item.path);
+                }}>
                   Öffnen
                 </Button>
               </CardActions>
